@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class Events extends Controller
 {
@@ -20,7 +21,7 @@ class Events extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -44,6 +45,11 @@ class Events extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $event = Event::find($id);
+        if (!$event) {
+            return response()->json(['message' => 'Evento não encontrado'], 404);
+        }
+        $event->delete();
+        return response()->json(['message' => 'Evento deletado com sucesso']);
     }
 }
