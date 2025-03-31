@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class Events extends Controller
@@ -12,6 +12,7 @@ class Events extends Controller
     public function index()
     {
         $events = Event::all();
+        
         return response()->json($events);
     }
 
@@ -28,8 +29,10 @@ class Events extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $event = Event::findOrFail($id);
+        return response()->json($event);
+        }
+    
 
     /**
      * Update the specified resource in storage.
