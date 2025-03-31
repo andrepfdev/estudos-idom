@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Models\Event;
 
 class Events extends Controller
 {
@@ -11,7 +12,9 @@ class Events extends Controller
      */
     public function index()
     {
-        return "teste";
+        $events = Event::all();
+        
+        return response()->json($events);
     }
 
     /**
@@ -19,6 +22,7 @@ class Events extends Controller
      */
     public function store(Request $request)
     {
+<<<<<<< HEAD
         $Rules = [
             'title' => 'required|min:3|max:40',
             'description' => 'required|min:10|max:250',
@@ -49,6 +53,9 @@ class Events extends Controller
 
 
         return response()->json($events, 201);
+=======
+        
+>>>>>>> 13ee9b4e8eaa02b1ed201c445a8aa15140b91ba0
     }
 
     /**
@@ -56,8 +63,10 @@ class Events extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $event = Event::findOrFail($id);
+        return response()->json($event);
+        }
+    
 
     /**
      * Update the specified resource in storage.
@@ -72,6 +81,11 @@ class Events extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $event = Event::find($id);
+        if (!$event) {
+            return response()->json(['message' => 'Evento não encontrado'], 404);
+        }
+        $event->delete();
+        return response()->json(['message' => 'Evento deletado com sucesso']);
     }
 }
