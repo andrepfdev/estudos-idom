@@ -11,7 +11,8 @@ class Events extends Controller
      */
     public function index()
     {
-        return "teste";
+        $events = Event::all();
+        return response()->json($events);
     }
 
     /**
