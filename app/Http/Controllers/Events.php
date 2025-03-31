@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class Events extends Controller
@@ -28,7 +29,14 @@ class Events extends Controller
      */
     public function show(string $id)
     {
-        //
+        $event = Event::find($id);
+
+        if($event){
+            return response()->json($event);
+        } else {
+            return response()->json("Evento de $id não encontrado!");
+        }
+        
     }
 
     /**

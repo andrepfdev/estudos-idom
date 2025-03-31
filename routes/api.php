@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/events', [Events::class, 'index'])->name('events.index');
+Route::get('/events/{id}', [Events::class, 'show'])->name('events.show');
