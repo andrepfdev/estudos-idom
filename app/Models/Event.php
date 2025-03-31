@@ -24,4 +24,9 @@ class Event extends Model
         'date' => 'datetime',
         'capacity' => 'integer',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
